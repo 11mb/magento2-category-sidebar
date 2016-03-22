@@ -22,12 +22,26 @@ foreach($categories as $category) {
             echo '<ul class="o-list o-list--unstyled">';
             // Loop through children categories
             foreach($childCategories as $childCategory) {
+                printHtml($childCategory, $block);
 
-                echo '<li ' . (($block->isActive($childCategory) == true) ? 'class="is-active"' : '') . ' >';
-                echo '<a href="' . $block->getCategoryUrl($childCategory) . '" title="' . $childCategory->getName() . '">' . $childCategory->getName() . '</a>';
-                echo '</li>';
             }
             echo '</ul>';
         }
     }
+}
+
+function printHtml($category, $block) {
+    echo '<li ' . (($block->isActive($category) == true) ? 'class="is-active"' : '') . ' >';
+    echo '<a href="' . $block->getCategoryUrl($category) . '" title="' . $category->getName() . '">' . $category->getName() . '</a>';
+
+    $childCategories = $block->getSubcategories($category);
+    if(count($childCategories) > 0) {
+
+        echo '<ul class="o-list o-list--unstyled">';
+        foreach($childCategories as $childCategory) {
+            printHtml($childCategory, $block);
+        }
+        echo '</ul>';
+    }
+    echo '</li>';
 }

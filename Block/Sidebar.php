@@ -103,7 +103,7 @@ class Sidebar extends Template {
          * Check if parent node of the store still exists
          */
         $category = $this->_categoryFactory->create();
-        $storeCategories = $category->getCategories($this->getSelectedRootCategory(), $recursionLevel = 1, $sorted, $asCollection, $toLoad);
+        $storeCategories = $category->getCategories($this->getSelectedRootCategory(), $recursionLevel = 0, $sorted, $asCollection, $toLoad);
 
         $this->_storeCategories[$cacheKey] = $storeCategories;
 
